@@ -45,6 +45,8 @@ public class BluetoothTest extends Activity
         Button openButton = (Button)findViewById(R.id.open);
         Button sendButton = (Button)findViewById(R.id.send);
         Button closeButton = (Button)findViewById(R.id.close);
+        Button quitAppButton = (Button)findViewById(R.id.quitapp);
+        
         myLabel = (TextView)findViewById(R.id.label);
         myTextbox = (EditText)findViewById(R.id.entry);
         
@@ -83,6 +85,15 @@ public class BluetoothTest extends Activity
                 catch (IOException ex) { }
             }
         });
+        
+        quitAppButton.setOnClickListener(new View.OnClickListener() 
+        {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
     }
     
 	@Override
@@ -116,7 +127,8 @@ public class BluetoothTest extends Activity
 	        	}
 	        }
 	        
-            try {
+            try 
+            {
 				openBT();
 		        myLabel.setText("Bluetooth Device Found:"+deviceName);
 			} catch (IOException e) {
@@ -238,9 +250,18 @@ public class BluetoothTest extends Activity
     void closeBT() throws IOException
     {
         stopWorker = true;
-        mmOutputStream.close();
-        mmInputStream.close();
-        mmSocket.close();
+        if(mmOutputStream!=null)
+        {
+        	mmOutputStream.close();
+        }
+        if(mmInputStream!=null)
+        {
+        	mmInputStream.close();
+        }
+        if(mmSocket!=null)
+        {
+        	mmSocket.close();
+        }
         myLabel.setText("Bluetooth Closed");
     }
 }

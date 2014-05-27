@@ -28,16 +28,22 @@
         android:layout_toLeftOf="@id/open"
         android:layout_alignTop="@id/open"
         android:text="Send" />
+
     <Button
         android:id="@+id/close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/send"
         android:layout_alignTop="@id/send"
-        android:text="Close" />
-    
-    <ListView android:id="@+id/listview"
+        android:layout_toLeftOf="@id/send"
+        android:text="CloseBT" />
+
+    <Button
+        android:id="@+id/quitapp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/close"
+        android:layout_alignBottom="@+id/close"
+        android:layout_alignParentLeft="true"
+        android:text="QuitApp" />
     
 </RelativeLayout>
