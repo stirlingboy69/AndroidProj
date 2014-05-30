@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.view.ContextMenu;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
