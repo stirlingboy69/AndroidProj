@@ -67,7 +67,7 @@
         android:layout_marginTop="18dp"
         android:orientation="vertical" >
 
-        <SurfaceView
+        < Android.Arduino.Bluetooth.ButtonSurfaceA
             android:id="@+id/surfaceView1"
             android:layout_width="wrap_content"
             android:layout_height="36dp" />

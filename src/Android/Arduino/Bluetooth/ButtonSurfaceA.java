@@ -12,7 +12,7 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 
 	private SurfaceHolder mSurfaceHolder;
 	private Thread mRunningThread;
-	private boolean mIsRunning=true;
+	private boolean mIsRunning=false;
 	
 	public ButtonSurfaceA(Context context){
 		super(context);
@@ -64,7 +64,7 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-		
+		 mIsRunning=true;
 	}
 
 	@Override

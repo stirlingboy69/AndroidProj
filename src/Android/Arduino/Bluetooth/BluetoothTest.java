@@ -51,7 +51,7 @@ public class BluetoothTest extends Activity
         myLabel = (TextView)findViewById(R.id.label);
         myTextbox = (EditText)findViewById(R.id.entry);
         
-        mButtonSurface = new ButtonSurfaceA(this);
+        mButtonSurface = ( ButtonSurfaceA)findViewById(R.id.surfaceView1 );
         
         //Open Button
         openButton.setOnClickListener(new View.OnClickListener()
