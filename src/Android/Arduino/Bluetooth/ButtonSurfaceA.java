@@ -40,7 +40,8 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 	private void Init(){
 		mSurfaceHolder = getHolder();
 		mSurfaceHolder.addCallback(this);
-		mRunningThread = new Thread(this);
+		
+		mRunningThread = null;
 		mElapsedTime =  SystemClock.elapsedRealtime();
 		//mRunningThread.start();
 	}
@@ -65,6 +66,32 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 			// End of painting to canvas. system will paint with this canvas,to the surface.
 			mSurfaceHolder.unlockCanvasAndPost(canvas);
 		}
+	}
+	public void StartThread()
+	{
+		Log.i("StartThread()","");
+		if(mRunningThread==null)
+		{
+			mIsRunning = true;
+			mRunningThread = new Thread(this);
+			mRunningThread.start();
+		}
+	}
+	public void KillThread()
+	{
+		Log.i("KillThread()","");
+		mIsRunning = false;
+		boolean retry = true;
+		
+		while (retry) {
+			try {
+				mRunningThread.join();
+				retry = false;
+			} 
+			catch (InterruptedException e) {
+			}
+		}
+		mRunningThread = null;
 	}
 	/**This method deals with paint-works. Also will paint something in background*/
 	private void Draw(Canvas canvas, long time) {
@@ -97,12 +124,19 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 	}
 
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	public void surfaceChanged(SurfaceHolder holder, 
+			int format, 
+			int width,
+			int height) 
+	{
 		// TODO Auto-generated method stub
-		//Log.i("surfaceChanged","width="+Integer.toString(width)+",height="+Integer.toString(height) );
-		mIsRunning = true;
-		mRunningThread.start();
+		Log.i("surfaceChanged","width="+Integer.toString(width)+",height="+Integer.toString(height) );
+		
+		if(mRunningThread!=null)
+		{
+			KillThread();
+		}
+		StartThread();
 	}
 
 	@Override
@@ -114,18 +148,6 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-		Log.i("surfaceDestroyed call","");
-		mIsRunning = false;
-		boolean retry = true;
-		
-		while (retry) {
-			try {
-				mRunningThread.join();
-				retry = false;
-			} 
-			catch (InterruptedException e) {
-			}
-		}
 	}
 	
 	
