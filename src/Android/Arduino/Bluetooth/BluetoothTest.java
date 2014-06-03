@@ -36,7 +36,7 @@ public class BluetoothTest extends Activity
     int counter;
     volatile boolean stopWorker;
     ButtonSurfaceA mButtonSurface;
-    
+    ButtonSurfaceViewPalette mButtonSurfaceViewPalette;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -51,7 +51,8 @@ public class BluetoothTest extends Activity
         myLabel = (TextView)findViewById(R.id.label);
         myTextbox = (EditText)findViewById(R.id.entry);
         
-        mButtonSurface = ( ButtonSurfaceA)findViewById(R.id.surfaceView1 );
+        mButtonSurface = ( ButtonSurfaceA)findViewById(R.id.surfaceViewLed1 );
+        mButtonSurfaceViewPalette = (ButtonSurfaceViewPalette)findViewById(R.id.surfaceViewPalette);
         
         //Open Button
         openButton.setOnClickListener(new View.OnClickListener()

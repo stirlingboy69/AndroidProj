@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.util.*;
@@ -18,6 +19,9 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 	private boolean mIsRunning=false;
 	private boolean mFlipColor=false;
 	private long mElapsedTime;
+	
+    volatile boolean mTouched = false;
+    volatile float mTouched_x, mTouched_y;
 	
 	public ButtonSurfaceA(Context context){
 		super(context);
@@ -44,6 +48,35 @@ public class ButtonSurfaceA extends SurfaceView implements Runnable, SurfaceHold
 		mRunningThread = null;
 		mElapsedTime =  SystemClock.elapsedRealtime();
 		//mRunningThread.start();
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		   mTouched_x = event.getX();
+		   mTouched_y = event.getY();
+		    
+		   int action = event.getAction();
+		   switch(action)
+		   {
+		   	case MotionEvent.ACTION_DOWN:
+		   		mTouched = true;
+		    break;
+		   	case MotionEvent.ACTION_MOVE:
+			   mTouched = true;
+		    break;
+		   	case MotionEvent.ACTION_UP:
+			   mTouched = false;
+		    break;
+		   	case MotionEvent.ACTION_CANCEL:
+			   mTouched = false;
+		    break;
+		   	case MotionEvent.ACTION_OUTSIDE:
+			   mTouched = false;
+		    break;
+		    default:
+		   }
+		return super.onTouchEvent(event);
 	}
 	
 	@Override
